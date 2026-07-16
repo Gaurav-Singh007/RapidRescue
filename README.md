@@ -95,18 +95,11 @@ Simply open **index.html** in your browser.
 
 ---
 
-# 📱 Screenshots
+## 📱 Screenshots
 
-> Replace these placeholders with your project screenshots.
+### 🏠 Home Dashboard
 
-| Home | SOS Screen |
-|------|------------|
-| Screenshot Here | Screenshot Here |
-
-| AI Assistant | Live Location |
-|--------------|---------------|
-| Screenshot Here | Screenshot Here |
-
+![Home Dashboard](home.png)
 ---
 
 # 📌 Project Workflow
