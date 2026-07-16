@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RapidRescue Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f43f5e',
+                        secondary: '#0f172a',
+                        surface: '#1e293b',
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 25px rgba(244, 63, 94, 0.4)' },
+                            '50%': { boxShadow: '0 0 60px rgba(244, 63, 94, 0.8)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body
+    class="bg-secondary text-white font-outfit min-h-screen w-screen overflow-x-hidden flex relative selection:bg-primary selection:text-white">
+
+    <!-- Ambient background glows for Premium Template Feeling -->
+    <div
+        class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full mix-blend-screen filter blur-[150px] opacity-60 pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full mix-blend-screen filter blur-[150px] opacity-50 pointer-events-none mb-10">
+    </div>
+
+    <!-- Sidebar (Desktop focus, hidden on small mobile) -->
+    <aside
+        class="hidden md:flex flex-col w-72 bg-surface/50 backdrop-blur-xl border-r border-white/10 sticky top-0 h-screen p-6 z-20">
+        <div class="flex items-center gap-4 mb-12">
+            <div
+                class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-rose-700 flex items-center justify-center shadow-lg shadow-primary/30">
+                <i data-lucide="activity" class="text-white w-6 h-6"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight">RapidRescue</h1>
+                <p class="text-xs text-slate-400">Emergency Protocol</p>
+            </div>
+        </div>
+
+        <nav class="space-y-4 flex-1">
+            <a href="#"
+                class="flex items-center gap-4 px-4 py-3 bg-primary/10 text-primary rounded-xl font-semibold transition hover:bg-primary/20">
+                <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                Emergency Hub
+            </a>
+            <a href="#"
+                class="flex items-center gap-4 px-4 py-3 text-slate-400 rounded-xl font-medium transition hover:text-white hover:bg-white/5">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                Live Tracking
+            </a>
+            <a href="#"
+                class="flex items-center gap-4 px-4 py-3 text-slate-400 rounded-xl font-medium transition hover:text-white hover:bg-white/5">
+                <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                Medical Profile
+            </a>
+            <a href="#"
+                class="flex items-center gap-4 px-4 py-3 text-slate-400 rounded-xl font-medium transition hover:text-white hover:bg-white/5">
+                <i data-lucide="settings" class="w-5 h-5"></i>
+                Settings
+            </a>
+        </nav>
+
+        <div
+            class="mt-auto p-5 rounded-2xl bg-gradient-to-br from-surface to-slate-800 border border-white/10 shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-3 opacity-20"><i data-lucide="crown" class="w-12 h-12"></i></div>
+            <p class="text-xs text-slate-400 mb-1">Developed by</p>
+            <p class="text-base font-bold text-white tracking-widest uppercase relative z-10">Gaurav Kumar</p>
+        </div>
+    </aside>
+
+    <!-- Main Mobile/Desktop Content -->
+    <main class="flex-1 min-h-screen flex flex-col relative z-10">
+        <!-- Top Navigation -->
+        <header class="w-full flex justify-between items-center p-6 md:p-8">
+            <div class="md:hidden flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-rose-700 flex items-center justify-center">
+                    <i data-lucide="activity" class="text-white w-5 h-5"></i>
+                </div>
+                <h1 class="text-lg font-bold">RapidRescue</h1>
+            </div>
+            <div class="hidden md:block">
+                <h2 class="text-2xl font-bold">Emergency Dashboard</h2>
+                <p class="text-sm text-slate-400">Real-time emergency monitoring system</p>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div
+                    class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    System Active
+                </div>
+                <button id="ai-help-btn"
+                    class="relative p-3 rounded-full bg-surface border border-white/10 hover:bg-white/5 transition shadow-lg group">
+                    <i data-lucide="bot" class="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform"></i>
+                    <span
+                        class="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-secondary"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dynamic Template Content -->
+        <div class="flex-1 flex flex-col items-center justify-center p-4">
+
+            <!-- Dashboard Grid Template -->
+            <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Left Panel: Medical Info -->
+                <div class="flex flex-col gap-6 order-2 lg:order-1">
+                    <div
+                        class="bg-surface/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 hover:border-white/10 transition">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="heart-pulse" class="text-primary w-5 h-5"></i>
+                            <h3 class="font-semibold text-lg">Vital Status</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-end border-b border-white/5 pb-2">
+                                <span class="text-sm text-slate-400">Heart Rate</span>
+                                <span class="text-xl font-bold">--<span class="text-sm text-slate-500 font-normal">
+                                        bpm</span></span>
+                            </div>
+                            <div class="flex justify-between items-end border-b border-white/5 pb-2">
+                                <span class="text-sm text-slate-400">Blood Type</span>
+                                <span class="text-xl font-bold">O+</span>
+                            </div>
+                            <div class="flex justify-between items-end">
+                                <span class="text-sm text-slate-400">Allergies</span>
+                                <span class="text-sm font-semibold text-rose-400">Penicillin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 mt-auto">
+                        <div class="w-full bg-slate-800 rounded-full overflow-hidden h-1.5 mb-2">
+                            <div class="bg-green-500 h-1.5 w-full rounded-full"></div>
+                        </div>
+                        <p class="text-xs text-center text-slate-400">Location Services Active</p>
+                    </div>
+                </div>
+
+                <!-- Center Panel: The SOS Core -->
+                <div
+                    class="col-span-1 lg:col-span-1 flex flex-col items-center justify-center min-h-[400px] order-1 lg:order-2">
+                    <div id="status-text"
+                        class="text-center mb-8 flex flex-col items-center opacity-100 transition-opacity duration-300">
+                        <span
+                            class="px-4 py-1.5 rounded-full bg-surface border border-white/10 text-slate-300 text-sm font-medium shadow-lg">
+                            Hold button to trigger emergency
+                        </span>
+                    </div>
+
+                    <div class="relative w-72 h-72 flex items-center justify-center mx-auto">
+                        <!-- Advanced Radar Sweep (Active later) -->
+                        <div id="radar-ring-1"
+                            class="absolute w-[180%] h-[180%] rounded-full border border-primary/40 opacity-0 scale-50 transition-all duration-1000">
+                        </div>
+                        <div id="radar-ring-2"
+                            class="absolute w-[250%] h-[250%] rounded-full border border-primary/20 opacity-0 scale-50 transition-all duration-1000 delay-300">
+                        </div>
+
+                        <!-- Core Sensor Button -->
+                        <button id="sos-btn"
+                            class="relative z-10 w-56 h-56 rounded-full bg-gradient-to-br from-primary to-rose-900 border-[6px] border-white/10 shadow-[0_0_50px_rgba(244,63,94,0.3)] flex flex-col items-center justify-center gap-3 text-white hover:scale-105 active:scale-95 transition-all duration-300 animate-pulse-glow group">
+                            <div
+                                class="absolute inset-0 rounded-full bg-black/20 opacity-0 group-active:opacity-100 transition-opacity">
+                            </div>
+
+                            <i data-lucide="triangle-alert" class="w-14 h-14 mb-0 drop-shadow-lg"></i>
+                            <span class="text-4xl font-extrabold tracking-widest drop-shadow-md">SOS</span>
+                            <span class="text-xs font-semibold text-rose-200 tracking-wider uppercase">Emergency
+                                Alarm</span>
+                        </button>
+                    </div>
+
+                    <!-- Action Result text -->
+                    <div id="action-result"
+                        class="mt-12 text-center h-16 opacity-0 transition-opacity duration-500 bg-surface/60 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/10">
+                        <p class="text-lg font-bold text-primary mb-1">Signal Broadcasted</p>
+                        <p class="text-xs text-slate-300">Tracking 3 nearest rescue units...</p>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Map & Dispatch Template -->
+                <div class="flex flex-col gap-6 order-3">
+                    <div
+                        class="bg-surface/40 backdrop-blur-md rounded-3xl p-6 border border-white/5 h-64 relative overflow-hidden group">
+                        <!-- Simulated Map Background -->
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] group-hover:scale-110 transition-transform duration-[10s]">
+                        </div>
+                        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface to-transparent">
+                        </div>
+
+                        <div class="relative z-10 flex flex-col h-full">
+                            <h3 class="font-semibold text-lg mb-2">Live Radius</h3>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-blue-500 animate-ping"></div>
+                                    <span class="text-sm font-medium">Your Location</span>
+                                </div>
+                                <div class="px-3 py-1 bg-white/10 rounded-full text-xs backdrop-blur-md">
+                                    Accuracy: 4m
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-surface/40 backdrop-blur-md rounded-xl p-5 border border-white/5 flex gap-4 items-center">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
+                            <i data-lucide="phone-call" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Local Dispatch</h4>
+                            <p class="text-xs text-slate-400">Available 24/7</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer class="md:hidden w-full text-center py-6 mt-auto">
+            <p class="text-xs text-slate-500 font-medium">Developed by</p>
+            <p class="text-sm font-bold text-white tracking-widest uppercase">Gaurav Kumar</p>
+        </footer>
+    </main>
+
+    <!-- AI Chatbot Overlay Windowed Design (Template Upgrade) -->
+    <div id="ai-chat-overlay"
+        class="fixed right-0 top-0 bottom-0 w-full md:w-[400px] bg-secondary/95 backdrop-blur-xl z-50 transform translate-x-full transition-transform duration-500 ease-out flex flex-col border-l border-white/10 shadow-2xl">
+        <!-- Chat Header -->
+        <div class="p-6 bg-surface/50 border-b border-white/10 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <i data-lucide="bot" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface rounded-full">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-white text-lg">Rescue AI</h3>
+                    <p class="text-xs text-blue-400 font-medium">Official Assistant</p>
+                </div>
+            </div>
+            <button id="close-chat-btn"
+                class="p-2 bg-white/5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition">
+                <i data-lucide="minimize-2" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-6">
+            <div class="flex items-start gap-3">
+                <div
+                    class="bg-gradient-to-br from-surface to-slate-800 rounded-2xl rounded-tl-sm p-4 text-sm text-slate-200 shadow-lg border border-white/5 leading-relaxed">
+                    Welcome to the <strong>RapidRescue</strong> dashboard. I am the AI responder. You can trigger an
+                    emergency using the main SOS control, or ask me for first-aid assistance.
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-6 bg-surface/30 border-t border-white/10">
+            <form id="chat-form" class="flex gap-3 relative">
+                <input type="text" id="chat-input" placeholder="Type your query..."
+                    class="flex-1 bg-surface border border-white/10 rounded-2xl pl-5 pr-12 py-4 text-sm text-white focus:outline-none focus:border-blue-500 transition shadow-inner"
+                    autocomplete="off">
+                <button type="submit"
+                    class="absolute right-2 top-2 bottom-2 aspect-square bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition shadow-lg shadow-blue-500/20">
+                    <i data-lucide="send" class="w-5 h-5 ml-1"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
