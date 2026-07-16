@@ -1,0 +1,51 @@
+body {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* Advanced Radar Template Animations */
+.radar-active {
+    animation: radarPulse 3s cubic-bezier(0.1, 0.4, 0.4, 1) infinite;
+}
+
+.radar-active-delayed {
+    animation: radarPulse 3s cubic-bezier(0.1, 0.4, 0.4, 1) infinite;
+    animation-delay: 1.5s;
+}
+
+@keyframes radarPulse {
+    0% {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+        border-width: 2px;
+        background: rgba(244, 63, 94, 0.05);
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+        border-width: 1px;
+        background: transparent;
+    }
+}
