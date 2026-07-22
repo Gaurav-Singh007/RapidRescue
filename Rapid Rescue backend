@@ -1,0 +1,130 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\Asus> powershell -Command "New-Item -ItemType Directory -Force -Path 'C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend'; Set-Content -Path 'C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend\server.js' -Value 'const express = require(\"express\");`nconst http = require(\"http\");`nconst { Server } = require(\"socket.io\");`nconst cors = require(\"cors\");`n`nconst app = express();`napp.use(cors());`n`nconst server = http.createServer(app);`nconst io = new Server(server, { cors: { origin: \"*\" } });`nconst activeEmergencies = {};`n`nio.on(\"connection\", (socket) => {`n  console.log(`[+] Device Connected: ${socket.id}`);`n  socket.on(\"trigger_sos\", (data) => {`n    console.log(`\n[🚨 SOS ALERT RECEIVED!]`);`n    console.log(`User: ${data.user || \"Gaurav Kumar\"}`);`n    console.log(`Lat: ${data.location?.latitude}, Lng: ${data.location?.longitude}\n`);`n    activeEmergencies[socket.id] = data;`n    io.emit(\"emergency_alert_broadcast\", data);`n  });`n  socket.on(\"update_location\", (data) => {`n    console.log(`[📍 LIVE GPS] ${data.user}: Lat ${data.location?.latitude}, Lng ${data.location?.longitude}`);`n    io.emit(\"location_updated\", data);`n  });`n  socket.on(\"disconnect\", () => {`n    delete activeEmergencies[socket.id];`n  });`n});`n`nserver.listen(5000, () => {`n  console.log(\"==========================================\");`n  console.log(\"🚑 RapidRescue Backend Server Running!\");`n  console.log(\"Port: http://localhost:5000\");`n  console.log(\"==========================================\");`n});'"
+
+
+    Directory: C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         7/22/2026   7:18 AM                rapidrescue-backend
+
+
+PS C:\Users\Asus> cd C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend; npm init -y; npm install express socket.io cors; node server.js
+npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system. For
+more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:85
++ ... ntigravity\scratch\ambulance-sos-app\rapidrescue-backend; npm init -y ...
++                                                               ~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system. For
+more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:98
++ ... ratch\ambulance-sos-app\rapidrescue-backend; npm init -y; npm install ...
++                                                               ~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend\server.js:1
+const express = require(" express\);
+                        ^^^^^^^^^^^^
+
+SyntaxError: Invalid or unexpected token
+    at wrapSafe (node:internal/modules/cjs/loader:1804:18)
+    at Module._compile (node:internal/modules/cjs/loader:1845:20)
+    at Object..js (node:internal/modules/cjs/loader:2002:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.18.0
+PS C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+PS C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend> Set-Content -Path 'server.js' -Value 'const express = require("express");
+>> const http = require("http");
+>> const { Server } = require("socket.io");
+>> const cors = require("cors");
+>>
+>> const app = express();
+>> app.use(cors());
+>>
+>> const server = http.createServer(app);
+>> const io = new Server(server, { cors: { origin: "*" } });
+>> const activeEmergencies = {};
+>>
+>> io.on("connection", (socket) => {
+>>   console.log(`[+] Device Connected: ${socket.id}`);
+>>   socket.on("trigger_sos", (data) => {
+>>     console.log("\n[🚨 SOS ALERT RECEIVED!]");
+>>     console.log(`User: ${data.user || "Gaurav Kumar"}`);
+>>     console.log(`Lat: ${data.location?.latitude}, Lng: ${data.location?.longitude}\n`);
+>>     activeEmergencies[socket.id] = data;
+>>     io.emit("emergency_alert_broadcast", data);
+>>   });
+>>   socket.on("update_location", (data) => {
+>>     console.log(`[📍 LIVE GPS] ${data.user}: Lat ${data.location?.latitude}, Lng ${data.location?.longitude}`);
+>>     io.emit("location_updated", data);
+>>   });
+>>   socket.on("disconnect", () => {
+>>     delete activeEmergencies[socket.id];
+>>   });
+>> });
+>>
+>> server.listen(5000, () => {
+>>   console.log("==========================================");
+>>   console.log("🚑 RapidRescue Backend Server Running!");
+>>   console.log("Port: http://localhost:5000");
+>>   console.log("==========================================");
+>> });'
+PS C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend> npm.cmd init -y; npm.cmd install express socket.io cors; node server.js
+Wrote to C:\Users\Asus\.gemini\antigravity\scratch\ambulance-sos-app\rapidrescue-backend\package.json:
+
+{
+  "name": "rapidrescue-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+added 89 packages, and audited 90 packages in 5s
+
+26 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+==========================================
+?? RapidRescue Backend Server Running!
+Port: http://localhost:5000
+==========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
